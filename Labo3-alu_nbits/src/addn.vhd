@@ -12,42 +12,45 @@
 -- Utilise      : Exercice cours VHDL
 --
 --| Modifications |-----------------------------------------------------------
--- Ver   Auteur   Date         Description
--- 2.0    EMI     16.10.2020   Additionneur 4 bits avec carry in/out
--- 3.0  RDE & EBO 14.03.2024   Additionneur N bits
+-- Ver   Auteur    Date        Description
+-- 2.0    EMI      16.10.2020  Additionneur 4 bits avec carry in/out
+-- 3.0   RDE & EBO 14.03.2024  Généralisation de l'additionneur pour N bits avec carry in/out
 ------------------------------------------------------------------------------
 
-library ieee;
-  use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity addn is
-  generic( N : positive range 1 to 32 := 12);
-  port (nbr_a_i   : in  std_logic_Vector(N-1 downto 0);
-        nbr_b_i   : in  std_logic_Vector(N-1 downto 0);
-        cin_i     : in  std_logic;
-        somme_o   : out std_logic_Vector(N-1 downto 0);
-        cout_o     : out std_Logic
-        );
-end addn;
+ENTITY addn IS
+  GENERIC (N : POSITIVE RANGE 1 TO 32 := 4);
+  PORT (
+    nbr_a_i : IN STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
+    nbr_b_i : IN STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
+    cin_i   : IN STD_LOGIC;
+    somme_o : OUT STD_LOGIC_VECTOR(N - 1 DOWNTO 0);
+    cout_o  : OUT STD_LOGIC
+  ); 
+END addn;
 
-architecture flot_don of addn is
+ARCHITECTURE flot_don OF addn IS
 
   -- signaux internes
 
-  signal nbr_a_s, nbr_b_s : unsigned(N downto 0);
-  signal somme_s : unsigned(N downto 0); 
-  signal cin_s : unsigned(0 downto 0);
+  SIGNAL nbr_a_s : unsigned(N DOWNTO 0);
+  SIGNAL nbr_b_s : unsigned(N DOWNTO 0);
+  SIGNAL somme_s : unsigned(N DOWNTO 0);
+  SIGNAL cin_s   : unsigned(0 DOWNTO 0);
+BEGIN
 
-begin
-  
-  nbr_a_s <=  '0' & unsigned(nbr_a_i);
-  nbr_b_s <=  '0' & unsigned(nbr_b_i);
+
+  nbr_a_s <= '0' & unsigned(nbr_a_i);
+  nbr_b_s <= '0' & unsigned(nbr_b_i);
 
   cin_s(0) <= cin_i;
 
-  somme_s <=  nbr_a_s +  nbr_b_s + cin_s ;   
-  somme_o <= std_logic_vector(somme_s(N-1 downto 0));
-  cout_o <= somme_s(N);
+  somme_s <= nbr_a_s + nbr_b_s + cin_s;
 
-end flot_don;
+  somme_o <= STD_LOGIC_VECTOR(somme_s(N - 1 DOWNTO 0));
+  cout_o  <= somme_s(N);
+
+END flot_don;

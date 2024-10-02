@@ -79,7 +79,6 @@ BEGIN -- Struct
   inc_s <= '1' WHEN opcode_i = "100" ELSE
     '0';
 
-  -- Selection de la soustraction 
   SUB <= sub1_s XOR sub2_s;
   cin_s <= SUB XOR inc_s; --selection de Cn entrant dans l'additionneur
 
