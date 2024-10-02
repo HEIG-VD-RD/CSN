@@ -2,7 +2,7 @@
 
 This repository contains all my practical work related to the Digital System Design course.
 
-[Labo1](labo1-bin_lin) <br>
+[Labo1](Labo1-bin_lin) <br>
 [Labo2](Labo2_add4) <br>
 [Labo3](Labo3-alu_nbits) <br>
 [Labo4](Labo4-dec_adr) <br>
